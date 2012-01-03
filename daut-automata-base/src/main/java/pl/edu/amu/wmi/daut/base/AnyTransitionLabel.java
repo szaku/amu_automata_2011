@@ -1,14 +1,19 @@
 package pl.edu.amu.wmi.daut.base;
 
-/*
+/**
  * @author cole1911
  */
 
-/*
-* Implementacja Transition Label reprezentujaca
-* przejscie po dowolnym znaku.
-*/
-class AnyTransitionLabel extends TransitionLabel {
+/**
+ * Implementacja Transition Label reprezentujaca
+ * przejscie po dowolnym znaku.
+ */
+public class AnyTransitionLabel extends TransitionLabel {
+
+    /**
+     * Konstruktor domyslny.
+     */
+    public AnyTransitionLabel() { };
 
     @Override
     public boolean canBeEpsilon() {
@@ -26,8 +31,13 @@ class AnyTransitionLabel extends TransitionLabel {
     }
 
     @Override
+    public String toString() {
+         return "ANY";
+    }
+
+    @Override
     protected TransitionLabel intersectWith(TransitionLabel label) {
-          return label.isEmpty() ? new EmptyTransitionLabel() : this;
+        boolean isResultEmpty = (label.isEmpty() || label.canBeEpsilon());
+        return isResultEmpty ? new EmptyTransitionLabel() : label;
     }
 }
-

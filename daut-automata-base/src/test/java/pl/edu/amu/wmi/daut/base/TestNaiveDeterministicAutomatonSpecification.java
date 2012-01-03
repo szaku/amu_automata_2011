@@ -28,8 +28,10 @@ public class TestNaiveDeterministicAutomatonSpecification extends TestCase {
         State s0 = automat.getInitialState();
 
         List<OutgoingTransition> s0Out = automat.allOutgoingTransitions(s0);
+        List<State> states = automat.allStates();
 
         assertEquals(s0Out.size(), 1);
+        assertEquals(states.size(), 4);
         assertFalse(automat.isFinal(s0));
         assertEquals(
                 ((CharTransitionLabel) s0Out.get(0).getTransitionLabel()).getChar(), 'a');
@@ -63,6 +65,7 @@ public class TestNaiveDeterministicAutomatonSpecification extends TestCase {
         State test1 = automat.targetState(r2, 'c');
         State test2 = automat.targetState(r2, 'd');
         State test3 = automat.targetState(r1, 'a');
+        State test4 = automat.targetState(r5, 'a');
 
         assertSame(test0, r3);
         assertSame(test1, r4);
@@ -70,5 +73,6 @@ public class TestNaiveDeterministicAutomatonSpecification extends TestCase {
         assertSame(test3, r2);
         assertNotSame(test0, r4);
         assertNotSame(test1, r5);
+        assertNotSame(test4, r1);
     }
 }
